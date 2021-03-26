@@ -3,3 +3,4 @@ PyYAML~=5.3.1
 dacite~=1.6.0
 setuptools~=51.0.0
 matplotlib~=3.4.0
+pip~=20.3.1

@@ -1,14 +1,15 @@
 from setuptools import setup
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 setup(
     name="cs8-skin-cancer",
     version="0.0.1",
     author="CS8 Team",
-    author_email="cehorn@stanford.edu",
-    packages=["glrm"],
+    packages=["cs8-skin-cancer"],
     package_dir={"core": "core"},
-    url="http://github.com/cehorn/GLRM/",
+    url="https://github.com/kirubhakaran12/data5703-capstone-cs8/",
     license="MIT",
-    install_requires=["tensorflow >= 2.0",
-                      "matplotlib"]
+    install_requires=requirements
 )
