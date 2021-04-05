@@ -11,7 +11,7 @@ def ham_10000_base():
   model.add(layers.Conv2D(64, (3, 3), activation='relu'))
   model.add(layers.Flatten()) #connects Conv2D and dense layers
   model.add(layers.Dense(64, activation='softmax')) #output layer, changed to softmax activation function so output can be interpreted as a probability
-  model.add(layers.Dense(n_classes)) #output layer
+  model.add(layers.Dense(7)) #output layer
 
   return model
 
