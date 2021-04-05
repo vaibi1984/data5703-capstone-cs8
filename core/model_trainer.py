@@ -10,6 +10,7 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications import ResNet50 #ResNet50
 from tensorflow.keras.applications import VGG16 #VGG16
+from tensorflow import keras
 from tensorflow.keras import layers, models, optimizers, applications, regularizers
 from tensorflow.keras.models import load_model
 
