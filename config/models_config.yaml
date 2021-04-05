@@ -6,3 +6,21 @@ ham_10000_vgg16:
   optimizer: "adam"
   loss: "categorical_crossentropy"
   metrics: ['accuracy']
+  
+ham_10000_base:
+  model_name: "HAM_10000_Base"
+  model_dir: '/content/gdrive/MyDrive/Capstone/models'
+  train_dir: '/content/gdrive/MyDrive/Capstone/dataset/HAM10000/HAM10000_by_class/'
+  batch_size: 32
+  optimizer: "adam"
+  loss: "categorical_crossentropy"
+  metrics: ['accuracy']
+  
+ham_10000_resnet50:
+  model_name: "HAM_10000_ResNet50"
+  model_dir: '/content/gdrive/MyDrive/Capstone/models'
+  train_dir: '/content/gdrive/MyDrive/Capstone/dataset/HAM10000/HAM10000_by_class/'
+  batch_size: 32
+  optimizer: "adam"
+  loss: "categorical_crossentropy"
+  metrics: ['accuracy']
