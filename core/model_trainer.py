@@ -1,18 +1,43 @@
+#Python version
+from platform import python_version
+
+#Google mount and reading data
 import os
+from google.colab import drive
+
+#TensorFlow
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from matplotlib import pyplot as plt
-from tensorflow.keras import optimizers
-from tensorflow.keras.applications import VGG16
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Flatten, Dense, Dropout
-from tensorflow.keras import regularizers
+from tensorflow.keras.applications import ResNet50 #ResNet50
+from tensorflow.keras.applications import VGG16 #VGG16
+from tensorflow import keras
+from tensorflow.keras import layers, models, optimizers, applications, regularizers
 from tensorflow.keras.models import load_model
-from google.colab import drive
+
+#Matplotlib
+from matplotlib import pyplot as plt
+
+#Dataclasses
 from dataclasses import dataclass, asdict
+
+#Yaml
 import yaml
+
+#Typing
 from typing import Optional, Union, List
+
+#Datacite
 from dacite import from_dict
+
+# To look better/efficiency
+import warnings #removes warnings
+import timeit #checks execution time of code. Example of how to use it here: https://pythonhow.com/measure-execution-time-python-code/
+
+
+print("python version used in colab:",python_version())
+seed(2021)
+## uncomment below code when finalising code
+  #warnings.filterwarnings('ignore')
 
 
 @dataclass
