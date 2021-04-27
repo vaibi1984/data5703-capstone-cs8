@@ -1,8 +1,16 @@
-ham_10000_vgg16:
-  model_name: "HAM_10000_VGG16"
-  model_dir: '/content/gdrive/MyDrive/Capstone/models'
-  train_dir: '/content/gdrive/MyDrive/Capstone/dataset/HAM10000/HAM10000_by_class/'
-  batch_size: 16
-  optimizer: "adam"
-  loss: "categorical_crossentropy"
-  metrics: ['accuracy']
+vgg16:
+  model_name: "vgg16-1"
+  input_params:
+    input_size: (224,224)
+  model_params:
+    batch_size: 32
+    arch: tf.keras.applications.VGG16
+    freeze_pretrained: True
+    steps_per_epoch: 100
+    metrics: ['accuracy']
+    loss:
+      func: "sparse_categorical_crossentropy"
+    optimizer:
+      func: "Adam"
+      params: "{'learning_rate':1e-3}"
+    class_weight_mu: 1
