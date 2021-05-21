@@ -14,3 +14,40 @@ vgg16:
       func: "Adam"
       params: "{'learning_rate':1e-3}"
     class_weight_mu: 1
+
+ham_10k_resnet50_v2:
+  model_name: "HAM_10k_ResNet50_v2"
+  input_params:
+    input_size: (600,450)
+  model_params:
+    batch_size: 32
+    arch: tf.keras.applications.ResNet50
+    freeze_pretrained: True
+    steps_per_epoch: 100
+    metrics: ['accuracy']
+    loss:
+      func: "sparse_categorical_crossentropy"
+    optimizer:
+      func: "Adam"
+      params: "{'learning_rate':1e-4}"
+    class_weight_mu: 1
+  attention_config:
+    resize:
+      resizeW: 224
+      resizeH: 224
+    dull_razor:
+      enabled: True
+      razorblur: "M"
+      mediankernel_razorblur: 3
+      filterstructure: 5
+      lowerbound: 5
+      inpaintmat: 3
+    blur:
+      enabled: True
+      normalblur: "M"
+      mediankernel_blur: 5
+      blurnum: 5
+    soft_attention:
+      alpha: 0.7
+      beta: 0.3
+      gamma: 0.0
