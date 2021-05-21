@@ -1,21 +1,28 @@
-def ham_10000_resnet50():
-  adam = optimizers.Adam
-  resnet = ResNet50(input_shape = (32,32,3), weights = 'imagenet', include_top = False, pooling = 'max') #model pre-trained on imagenet dataset
+def ham_10000_resnet50(CLASS_N=3):
 
-  for layer in resnet.layers:
-      layer.trainable = True
+    #model pre-trained on imagenet dataset
+    resnet_base = ResNet50(input_shape = (600,450,3), weights = 'imagenet', include_top = False, pooling = 'avg') 
 
-  x = Flatten()(resnet.layers[-1].output) #extra flatten layer with dense layer to be interpreted as probability
-  x = Dense(7, activation='softmax', name='softmax')(x) #extra flatten layer with dense layer to be interpreted as probability
-  model = Model(inputs = resnet.input, outputs = x) #defining inputs and outputs in model
+    for layer in resnet_base.layers:
+        layer.trainable = False
 
-  return model
+    x = Flatten()(resnet_base.layers[-1].output)
+    x = Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.001))(x)#regulariser reduces overfitting
+    x = Dropout(0.5)(x) #50% change in the output of neuron made 0 # also reduces overfitting
+    x = Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.001))(x)#regulariser reduces overfitting
+    x = Dropout(0.5)(x) #50% change in the output of neuron made 0 # also reduces overfitting
+    x = Dense(CLASS_N, activation = 'softmax', kernel_regularizer = regularizers.l2(0.001))(x)
+
+    model = Model(inputs = resnet_base.input, outputs = x)
+
+    return model
 
 
 if __name__ == "__main__":
     name = 'ham_10000_resnet50'
     model_config3 = yaml.safe_load(yaml_config3)
-    model_trainer3 = ModelTrainer.load_from_config(model_config3[name])
-    model3 = ham_10000_base()
-    model_trainer3.register_model(model3)
-    model_trainer.train()
+    model_trainer = ModelTrainer.load_from_config(model_config3[name],'/home/alol_elba/download/anaconda3/Capstone', 
+                                               retrain = True)
+    model_trainer.class_weight = {0:2.0,1:2.0,2:1.0}
+    model_trainer.train(epochs=33, verbose = 1)
+    model_trainer.plot_confusion_matrix()
